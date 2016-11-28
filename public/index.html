@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="my-app">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="cssjson/cssjson.js"></script>
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="js/module.js"></script>
+</head>
+<body ng-controller="my-ctrl">
+    <div class="header"></div>
+    <div class="butt">
+        <input type="button" value="生成代码" ng-click="createCode()">
+    </div>
+    <div class="codeArea">
+        <h2>编辑您的代码：</h2>
+        <textarea id="TestCode" wrap="logical" ng-model="code"></textarea>
+    </div>
+    <div class="jsCode">
+        <h2>js代码：</h2>
+        <textarea id="TestCode" wrap="logical" ng-model="jscode"></textarea>
+    </div>
+    <div class="result">
+        <h2>查看结果:</h2>
+        <div class="result-display" htmlstr result="code" target="element"></div>
+    </div>
+</body>
+</html>
