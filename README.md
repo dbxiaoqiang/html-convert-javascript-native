@@ -1,4 +1,4 @@
-## 推荐助手UI设计工具
+## 用HTML做设计 然后自动把HTML转换为Javascript Native
 - 下载代码 执行npm install
 - 在浏览器中执行http://loacalhost:1219
 - 在html代码框中输入html代码
