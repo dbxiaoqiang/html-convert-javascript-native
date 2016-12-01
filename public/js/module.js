@@ -37,11 +37,11 @@ var relationTree = [];
 function analysisDom(el) {
     var current = $(el);
     if (current.is('style')) { return 'style'; }
-    if (current.is('text')) { return 'text'; }
     var name = current.attr('name');
     if (name) { 
         var tag = current[0].tagName.toLowerCase();
         domTree.push('var ' + name + ' = document.createElement("' + tag + '");');
+        createText(name, current.text());
     }
     if (tag === 'img') {
         var src = current.attr('src');
@@ -54,9 +54,6 @@ function analysisDom(el) {
         switch (type) {
             case 'style':
                 createStyle(child);
-                break;
-            case 'text':
-                createText(child, name);
                 break;
             default:
                 createElement(child, name);
@@ -75,10 +72,9 @@ function createElement(child, parent) {
     if (!parent) { return; }
     relationTree.push(parent + '.appendChild(' + childName + ');');
 }
-function createText(child, parent) {
-    if (!parent) { return; }
-    if (!child.innerText) { return; }
-    textTree.push(parent + '.innerHTML = "' + child.innerText + '";');
+function createText(name, text) {
+    if (!text) { return; }
+    textTree.push(name + '.innerText = "' + text + '";');
 }
 function createStyle(style) {
     var innerText = style.innerText;
@@ -105,6 +101,8 @@ function createCode() {
         code += '\n'
     });
     code += styleSettingTree.join('\n');
+    code += '\n';
+    code += textTree.join('\n');
     code += '\n';
     code += relationTree.join('\n');
     code += '\n';
